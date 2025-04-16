@@ -1,12 +1,31 @@
 const canvas = document.getElementById("tennis-court");
 const ctx = canvas.getContext("2d");
 
-canvas.width = 800;
-canvas.height = 400;
+// Fonction pour ajuster la taille du canvas à l'écran
+function resizeCanvas() {
+    const width = window.innerWidth;  // Largeur de la fenêtre
+    const height = window.innerHeight; // Hauteur de la fenêtre
+
+    // Ajuster la taille du canvas en gardant le ratio 2:1
+    const aspectRatio = 2; // 800x400 est le ratio 2:1
+    const newWidth = Math.min(width, 800); // Largeur maximale de 800px
+    const newHeight = newWidth / aspectRatio;
+
+    // Appliquer les nouvelles dimensions
+    canvas.width = newWidth;
+    canvas.height = newHeight;
+}
+
+// Redimensionner le canvas lors du chargement de la page
+resizeCanvas();
+
+// Redimensionner le canvas chaque fois que la taille de la fenêtre change
+window.addEventListener('resize', resizeCanvas);
 
 const courtWidth = canvas.width;
 const courtHeight = canvas.height;
 
+// Variables de jeu comme avant
 let player = { x: 30, y: courtHeight / 2 - 30, width: 10, height: 60, speed: 5 };
 let ai = { x: courtWidth - 40, y: courtHeight / 2 - 30, width: 10, height: 60, speed: 3 };
 let ball = { x: courtWidth / 2, y: courtHeight / 2, radius: 7, speedX: 4, speedY: 4 };
